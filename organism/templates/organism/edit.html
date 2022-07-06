@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block title %}編集{% endblock title %}
+{% block content %}
+{% load django_bootstrap5 %}
+
+{% for message in messages %}
+<div {% if message.tags %}class="{{ message.tags }}"{% endif %}>
+  {{ message }}
+</div>
+{% endfor %}
+<div class="container">
+  <div class="row">
+    <div class="col">
+
+    </div>
+    <div class="col">
+      <form class="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        {% bootstrap_button button_type="submit" content="Edit" %}
+      </form>
+
+      <form action="{% url 'organism:delete' organism_name_en=organism.name_en %}" method="post">
+        {% csrf_token %}
+        <input type="submit" value="削除">
+      </form>
+
+      {% comment %} <form method="post">
+        {% csrf_token %}
+        <ul>
+          {{ form.as_p }}
+        </ul>
+        <input type="submit" value="登録">
+      </form> {% endcomment %}
+    </div>
+    <div class="col">
+      Column
+    </div>
+  </div>
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+
+{% block title %}生物{% endblock %}
+{% load static %}
+{% load bootstrap_icons %}
+{% block content %}
+
+<div class="container">
+  <div class="row">
+    {% for organism in organisms %}
+    <div class="col">
+
+      <div class="card" style="width: 18rem;">
+        {% if organism.picture %}
+        <img src="{{ organism.picture.url }}" class="card-img-top fit-pic" alt="{{ organism.name }}">
+        {% else %}
+        <img src="static/images/placeholder.jpg" class="card-img-top fit-pic" alt="{{ organism.name }}">
+        {% endif %}
+        <div class="card-body">
+          <h5 class="card-title">{{ organism.name_ja }}</h5>
+
+          {% if organism.outline %}
+          <p class="card-text">{{ organism.outline|slice:"100" }}...</p>
+          {% else %}
+          <p class="card-text">概要はありません</p>
+          {% endif %}
+          <a href="organism/{{ organism.name_en }}" class="btn btn-success">詳細</a>
+        </div>
+      </div>
+    </div>
+          {% endfor %}
+
+  </div>
+</div>
+
+
+{% comment %}
+<div class="paginator">
+  {% if organisms.has_previous %}
+  <a href="?page={{ organisms.previous_page_number }}">Back &lt;</a>
+  {% else %}
+  Back &lt;
+  {% endif %}
+
+  {{ organisms.number }}
+
+  {% if organisms.has_next %}
+  <a href="?page={{ organisms.next_page_number }}">&gt; Next</a>
+  {% else %}
+  &gt; Next
+  {% endif %}
+</div>
+{% endcomment %}
+
+<div class="paginator pt-4">
+<nav aria-label="Page navigation example">
+  <ul class="pagination justify-content-center">
+    {% if organisms.has_previous %}
+    <li class="page-item">
+      <a class="page-link" href="?page={{ organisms.previous_page_number }}" tabindex="-1">Previous</a>
+    </li>
+    {% else %}
+    <li class="page-item disabled">
+      <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+    </li>
+    {% endif %}
+    <li class="page-item"><a class="page-link" href="?page=1">1</a></li>
+    <li class="page-item"><a class="page-link" href="?page=2">2</a></li>
+    <li class="page-item"><a class="page-link" href="?page=3">3</a></li>
+
+    {% if organisms.has_next %}
+    <li class="page-item">
+      <a class="page-link" href="?page={{ organisms.next_page_number }}">Next</a>
+    </li>
+    {% else %}
+    <li class="page-item disabled">
+      <a class="page-link" href="#">Next</a>
+    </li>
+    {% endif %}
+
+  </ul>
+</nav>
+</div>
+{% comment %} <a href="{% url 'favorite:list' %}">TOP</a> {% endcomment %}
+
+{% endblock %}

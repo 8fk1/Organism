@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}お気に入り{% endblock %}
+
+{% block content %}
+{% load static %}
+
+<ul>
+  {% for f in favorite.items %}
+  <li>
+    {{ f.organism.name_ja }}
+    <form action="{% url 'favorite:delete' name_en=f.organism.name_en  %}" method="post">
+      {% csrf_token %}
+      <input type="submit" value="削除">
+    </form>
+  </li>
+    {% empty %}
+  空
+  {% endfor %}
+</ul>
+  <a href="/" class="href">HOME</a>
+
+
+
+{% endblock %}

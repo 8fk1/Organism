@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% block title %}詳細{% endblock title %}
+{% load django_bootstrap5 %}
+{% load bootstrap_icons %}
+{% block content %}
+  {% comment %} <a href="images/{% url organism.name_en %}.jpg"></a> {% endcomment %}
+  {% comment %} <p>
+    <img class="fit-pic" src="../static/images/{{ organism.name_en }}.jpg" alt="{{ organism.name_ja }}">
+  </p> {% endcomment %}
+  {% comment %} <img class="fit-pic" src="{% static 'images/tulip.jpg' %}.jpg" alt="{{ organism.name_ja }}"> {% endcomment %}
+  <span class="h1">{{ organism.name_ja }}</span>
+  <span class="en">{{ organism.getNameText }}</span>
+  {% if organism.picture %}
+  <img src="{{ organism.picture.url }}" class="card-img-top fit-pic" alt="{{ organism.name }}">
+  {% else %}
+  <img src="static/images/placeholder.jpg" class="card-img-top fit-pic" alt="{{ organism.name }}">
+  {% endif %}
+
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">名前</th>
+        <th scope="col">英名</th>
+        <th scope="col">絶滅</th>
+        <th scope="col">ドメイン</th>
+        <th scope="col">界</th>
+        <th scope="col">門</th>
+        <th scope="col">綱</th>
+        <th scope="col">目</th>
+        <th scope="col">科</th>
+
+
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>{{ organism.name_ja }}</td>
+        <td>{{ organism.getNameText }}</td>
+        <td>{{ organism.isSurvival }}</td>
+        <td>{{ organism.domain }}</td>
+        <td>{{ organism.kingdom }}</td>
+        <td>{{ organism.division }}</td>
+        <td>{{ organism.classis }}</td>
+        <td>{{ organism.order }}</td>
+        <td>{{ organism.family }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <form method="post">
+    {% csrf_token %}
+    <input type="submit" value="favorite">
+  </form>
+
+  <a href="{% url 'organism:edit' organism_name_en=organism.name_en %}">
+      {% bootstrap_button content="編集" button_type="button" button_class="btn-success"%}
+  </a>
+
+
+  <a href="/">HOME</a>
+
+  <style>
+    .en {
+      font-family: 'Splash', cursive;
+      font-size: 2em;
+    }
+    .fit-pic {
+      width: 250px;
+    }
+  </style>
+{% endblock content %}
