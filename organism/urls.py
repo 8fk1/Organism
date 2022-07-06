@@ -6,6 +6,7 @@ app_name = 'organism'
 
 urlpatterns = [
     path('', views.organism_list, name="list"),
+    path('organism/', views.permission_denied, name="permission_denied"),
     path('organism/register', views.organism_register, name="register"),
     path('organism/<str:organism_name_en>',
          views.organism_detail, name='detail'),

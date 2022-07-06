@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'lauth',
     'django_bootstrap5',
     'django_bootstrap_icons',
+    'pizza',
 ]
 
 MIDDLEWARE = [
@@ -98,9 +99,9 @@ DATABASES = {
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
 AUTH_PASSWORD_VALIDATORS = [
-    {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',},
-    {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',},
-    {'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',},
+    {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator', },
+    {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator', },
+    {'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator', },
     {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator', },
 ]
 
@@ -127,7 +128,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # https://tsukasa-blog.com/programming/social-django/
 AUTHENTICATION_BACKENDS = (
     'social_core.backends.open_id.OpenIdAuth',  # OpenId用
-    #'social_core.backends.google.GoogleOpenId',  # Google OpenId用
+    # 'social_core.backends.google.GoogleOpenId',  # Google OpenId用
     'social_core.backends.google.GoogleOAuth2',  # Google OAuth2用
 
     'social_core.backends.github.GithubOAuth2',  # Github用
